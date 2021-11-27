@@ -1,12 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
-
-const createAPI = () => {
-  const instance = axios.create({
-    baseURL: "http://api.weatherapi.com/v1",
-    timeout: 1000,
-  });
-  return instance;
-};
+import { AxiosInstance, AxiosResponse } from "axios";
 
 /**
  *
@@ -18,7 +10,7 @@ const get = (
   url: string,
   params?: object
 ): Promise<AxiosResponse<unknown, unknown>> => {
-  return axios.get(url, params);
+  return axios.get(url, { params });
 };
 
 export default { get };

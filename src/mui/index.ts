@@ -7,6 +7,9 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default {
   styled,
@@ -17,6 +20,9 @@ export default {
   IconButton,
   Typography,
   InputBase,
+  Autocomplete,
+  TextField,
+  CircularProgress,
   MenuIcon,
   SearchIcon,
 };

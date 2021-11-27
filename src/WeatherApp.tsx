@@ -1,16 +1,22 @@
 import { useContext, useEffect } from "react";
 
+import locationService from "./service/location";
+
 import { WeatherAppContext } from "./context/context";
-import { Actions } from "./context/reducer";
 
 import Header from "./components/Header";
 
 const App = () => {
-  const { state, dispatch } = useContext(WeatherAppContext);
+  const { dispatch } = useContext(WeatherAppContext);
 
   useEffect(() => {
-    dispatch({ type: Actions.INITIALISE });
+    initialise();
+    // eslint-disable-next-line
   }, []);
+
+  const initialise = () => {
+    locationService.getCurrentLocation(dispatch);
+  };
 
   return <Header />;
 };

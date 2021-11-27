@@ -1,92 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+
+import { WeatherAppContext } from "../../context/context";
 
 import Mui from "../../mui";
-
-const Search = Mui.styled("div")(({ theme }: any) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: Mui.alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: Mui.alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = Mui.styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = Mui.styled(Mui.InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
+import LocationSearch from "../LocationSearch";
 
 const Header = (): React.ReactElement => {
-  useEffect(() => {
-    fetch("https://api.ipregistry.co/?key=tryout")
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (payload) {
-        console.log(
-          payload.location.country.name + ", " + payload.location.city
-        );
-      });
-  }, []);
+  const { state, dispatch } = useContext(WeatherAppContext);
+  const { location } = state;
+
+  const onChangeLocation = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const { target } = event;
+    const searchLocation = target.value;
+    console.log("searchLocation :", searchLocation);
+  };
 
   return (
     <Mui.Box sx={{ flexGrow: 1 }}>
       <Mui.AppBar position="static">
         <Mui.Toolbar>
-          <Mui.IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <Mui.MenuIcon />
-          </Mui.IconButton>
           <Mui.Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            paddingRight={2}
+            display="flex"
+            flexGrow={1}
           >
-            MUI
+            Weather
           </Mui.Typography>
-          <Search>
-            <SearchIconWrapper>
-              <Mui.SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <LocationSearch />
         </Mui.Toolbar>
       </Mui.AppBar>
     </Mui.Box>
