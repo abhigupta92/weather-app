@@ -1,9 +1,13 @@
 import axios, { AxiosResponse } from "axios";
+
 import restClient from "../restClient";
+
+import { ForecastWeather } from "./types";
 
 const config = { key: "b5eee329235c4e16b01143510212611" };
 
 const URL_GET_LOCATION_SUGGESTIONS = "search.json";
+const URL_FORECAST_WEATHER = "forecast.json";
 
 const createAPI = () => {
   const instance = axios.create({
@@ -12,13 +16,32 @@ const createAPI = () => {
   });
   return instance;
 };
+const createQueryParams = (params: object): object => {
+  return { ...config, ...params };
+};
 
 const getLocationSuggestions = (
   searchQuery: string
 ): Promise<AxiosResponse<any, any>> =>
-  restClient.get(createAPI(), URL_GET_LOCATION_SUGGESTIONS, {
-    ...config,
-    q: searchQuery,
-  });
+  restClient.get(
+    createAPI(),
+    URL_GET_LOCATION_SUGGESTIONS,
+    createQueryParams({ q: searchQuery })
+  );
 
-export default { getLocationSuggestions };
+const getCurrentWeather = (searchQuery: string): Promise<ForecastWeather> =>
+  restClient
+    .get(
+      createAPI(),
+      URL_FORECAST_WEATHER,
+      createQueryParams({ q: searchQuery, days: 1, aqi: "no", alerts: "yes" })
+    )
+    .then((response: AxiosResponse<any, any>) => {
+      const data: ForecastWeather = response.data;
+      return data;
+    })
+    .catch((err) => {
+      throw err;
+    });
+
+export default { getLocationSuggestions, getCurrentWeather };

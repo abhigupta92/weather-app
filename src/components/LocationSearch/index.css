@@ -1,0 +1,23 @@
+.location-search-container {
+  display: flex;
+  width: 30%;
+  justify-content: flex-end;
+}
+
+.mobile-search-icon {
+  display: none;
+  color: white;
+}
+
+.test {
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .mobile-search-icon {
+    display: block;
+  }
+  .location-search-container {
+    width: 100%;
+  }
+}

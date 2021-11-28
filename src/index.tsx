@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-import { WeatherAppProvider } from "./context/context";
+import { WeatherAppProvider } from "./context/WeatherAppContext";
 
 import WeatherApp from "./WeatherApp";
 

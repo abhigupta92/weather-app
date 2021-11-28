@@ -1,0 +1,22 @@
+.app-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  .app-header-container {
+    align-items: flex-start !important;
+    flex-direction: column;
+    padding-bottom: 8px;
+  }
+}
+
+.header-label {
+  padding-right: 16px;
+  display: flex;
+  border-right: 1px solid white;
+}
+
+.toggle-container {
+  margin-left: 16px;
+}

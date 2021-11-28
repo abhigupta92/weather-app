@@ -1,11 +1,9 @@
-import { Dispatch } from "react";
-
 import get from "lodash/get";
 
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import restClient from "../restClient";
 
-import { Action, Actions } from "../../context/reducer";
+import { CurrentLocation } from "./types";
 
 const URL_GET_LOCATION = "";
 
@@ -17,14 +15,18 @@ const createAPI = () => {
   return instance;
 };
 
-const getCurrentLocation = (dispatch: Dispatch<Action>) =>
-  restClient
+const getCurrentLocation = (): Promise<CurrentLocation> => {
+  return restClient
     .get(createAPI(), URL_GET_LOCATION)
-    .then((response: AxiosResponse) => {
+    .then((response) => {
       const { data } = response;
       const country = get(data, "location.country.name");
       const city = get(data, "location.city");
-      dispatch({ type: Actions.SET_LOCATION, data: `${country}, ${city}` });
+      return { country, city };
+    })
+    .catch((err) => {
+      throw err;
     });
+};
 
 export default { getCurrentLocation };

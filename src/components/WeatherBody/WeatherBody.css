@@ -1,0 +1,27 @@
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background-color: #ebebeb;
+}
+
+.header-container {
+  display: flex;
+  padding-bottom: 8px;
+}
+
+.icon-refresh {
+  color: blue;
+}
+
+.section2 {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.section3 {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0px;
+}

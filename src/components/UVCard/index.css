@@ -1,0 +1,17 @@
+.uv-card-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.uv-card-container-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+}

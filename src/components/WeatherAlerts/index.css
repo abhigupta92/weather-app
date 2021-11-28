@@ -1,0 +1,26 @@
+.alerts-content-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.alerts-no-alert-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.alerts-list-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.alert-event {
+  margin: 8px 0px !important;
+  border-bottom: solid 1px #ebebeb;
+}

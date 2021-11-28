@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch } from "react";
+import { useReducer, createContext, Dispatch } from "react";
 
 import { reducer, Action, InitialState, initialState } from "./reducer";
 
@@ -8,7 +8,7 @@ const WeatherAppContext = createContext<{
 }>({ state: initialState, dispatch: () => null });
 
 function WeatherAppProvider(props: any) {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { children } = props;
 
   return (
