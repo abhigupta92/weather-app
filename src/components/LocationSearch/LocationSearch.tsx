@@ -17,8 +17,11 @@ type Props = {
 };
 const LocationSearch = (props: Props): React.ReactElement => {
   const { onChange } = props;
-  const [searchString, setSearchString] = useState<string | undefined>("");
+  const [searchString, setSearchString] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
+  const [option, setOption] = useState<undefined | LocationSuggestion>(
+    undefined
+  );
   const [locations, setLocations] = React.useState<
     readonly LocationSuggestion[]
   >([]);
@@ -57,7 +60,17 @@ const LocationSearch = (props: Props): React.ReactElement => {
   const onChangeLocation = (
     _event: React.SyntheticEvent<Element, Event>,
     value: string | LocationSuggestion | null
-  ) => onChange(value as LocationSuggestion);
+  ) => {
+    setOption(value as LocationSuggestion);
+    onChange(value as LocationSuggestion);
+  };
+
+  const onKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter") {
+      setOpen(true);
+      event.preventDefault();
+    }
+  };
 
   const classes = stylesCreator();
   return (
@@ -72,6 +85,7 @@ const LocationSearch = (props: Props): React.ReactElement => {
           borderBottomColor: "white",
           paddingRight: { xs: 0, sm: 2 },
         }}
+        value={option}
         open={open}
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
@@ -79,13 +93,16 @@ const LocationSearch = (props: Props): React.ReactElement => {
           option: LocationSuggestion,
           value: LocationSuggestion
         ) => option.name === value.name}
-        getOptionLabel={(option: LocationSuggestion) => option.name}
+        getOptionLabel={(option: LocationSuggestion) =>
+          option.name || searchString
+        }
         options={locations}
         loading={loading}
         popupIcon=""
         inputValue={searchString}
         onInputChange={onChangeInput}
         onChange={onChangeLocation}
+        onKeyPress={onKeyPress}
         renderInput={(params) => (
           <TextField
             {...params}
