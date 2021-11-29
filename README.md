@@ -24,7 +24,7 @@ Run `npm run test`
 
 All functioanlities and components are test covered
 
-![Test Result](./screenshots/unitTest.png)
+![Test Result](./screenshots/unit-test.png)
 
 ## Commit Structure
 
@@ -37,9 +37,9 @@ PC:
 
 ![Weather App](./screenshots/weather-pc.png)
 
-![Weather Present Summary](./screenshots/weather-current conditions.png)
+![Weather Present Summary](./screenshots/weather-current-conditions.png)
 
-![Weather Hourly Summary](./screenshots/weather-day hourly-conditions.png)
+![Weather Hourly Summary](./screenshots/weather-day-hourly-conditions.png)
 
 ![Loading](./screenshots/weather-loading.png)
 
