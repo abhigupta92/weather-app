@@ -11,4 +11,6 @@ const get = (
   params?: object
 ): Promise<AxiosResponse<unknown, unknown>> => axios.get(url, { params });
 
-export default { get };
+const service = { get };
+
+export default service;

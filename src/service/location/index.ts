@@ -5,7 +5,7 @@ import restClient from "../restClient";
 
 import { CurrentLocation } from "./types";
 
-const URL_GET_LOCATION = "";
+export const URL_GET_LOCATION = "";
 
 const createAPI = () => {
   const instance = axios.create({
@@ -29,4 +29,8 @@ const getCurrentLocation = (): Promise<CurrentLocation> => {
     });
 };
 
-export default { getCurrentLocation };
+const service = {
+  getCurrentLocation,
+};
+
+export default service;

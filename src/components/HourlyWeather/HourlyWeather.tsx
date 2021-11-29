@@ -25,7 +25,10 @@ const HourlyWeather = (props: Props): React.ReactElement => {
   const currentHour = new Date(localtime || "").getHours();
   return (
     <WithLoader loadingKey={LoadingStateEnum.CURRENT_WEATHER}>
-      <Box className="hour-list-container">
+      <Box
+        className="hour-list-container"
+        data-testid="weather-hour-list-container"
+      >
         {list &&
           list
             .slice(currentHour)

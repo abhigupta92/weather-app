@@ -29,13 +29,16 @@ const HourWeatherCard = (props: Props): React.ReactElement => {
   };
 
   return (
-    <Card className="list-item-container">
+    <Card
+      className="list-item-container"
+      data-testid="weather-hour-card-container"
+    >
       <CardContent className="list-item-container-inner">
         <Box className="list-item-hour" display="flex" flex={1}>
           <Typography>{hour}</Typography>
         </Box>
         <Box className="list-item-icon">
-          <img src={summary.condition.icon} />
+          <img src={summary.condition.icon} alt="condition" />
         </Box>
         <Box className="list-item-temp">
           <Typography variant="h4">{getTemperature()}</Typography>

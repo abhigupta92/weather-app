@@ -39,9 +39,10 @@ const LocationSearch = (props: Props): React.ReactElement => {
     }
   };
 
+  // eslint-disable-next-line
   const debouncedFetch = useCallback(
     debounce((nextValue) => fetchLocation(nextValue), 1000),
-    [] // will be created only once initially
+    []
   );
 
   const onChangeInput = (_: any, value: string) => {
@@ -62,7 +63,8 @@ const LocationSearch = (props: Props): React.ReactElement => {
   return (
     <Box className="location-search-container">
       <Autocomplete
-        id="location-search-input"
+        id="location_search_input"
+        data-testid="location_search_input"
         freeSolo
         noOptionsText="No Results"
         sx={{

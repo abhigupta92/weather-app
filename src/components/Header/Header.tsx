@@ -33,7 +33,7 @@ const Header = (): React.ReactElement => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} data-testid="weather-header">
       <AppBar position="static">
         <Toolbar className="app-header-container">
           <Box display="flex">

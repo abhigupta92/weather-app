@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+## Installation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Run `npm i` or `npm i -f`
 
-## Available Scripts
+## Running the App
 
-In the project directory, you can run:
+Run `npm run start`
 
-### `npm start`
+## Running the Tests
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Run `npm run test`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Functionalities
 
-### `npm test`
+1. Display current weather conditions of city
+2. Display hourly weather conditions
+3. Search for city to show weather conditions
+4. Show data units based on metric selected
+5. Show UV and Alerts for city selected
+6. Error Handling (all BE error will be catched & shown under modal)
+7. Loader (display loading for all API calls)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Test Coverage
 
-### `npm run build`
+All functioanlities and components are test covered
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Test Result](./screenshots/unitTest.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Commit Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Semantic Commits:
+https://nitayneeman.com/posts/understanding-semantic-commit-messages-using-git-and-angular/
 
-### `npm run eject`
+## App ScreenShots
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+PC:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Weather App](./screenshots/weather-pc.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Weather Present Summary](./screenshots/weather-current conditions.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Weather Hourly Summary](./screenshots/weather-day hourly-conditions.png)
 
-## Learn More
+![Loading](./screenshots/weather-loading.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Mobile:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Mobile Weather App](./screenshots/weather-mobile.png)
+
+![Mobile Hourly](./screenshots/weather-mobile-day-hourly.png)

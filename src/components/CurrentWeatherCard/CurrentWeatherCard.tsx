@@ -32,7 +32,7 @@ const CurrentWeatherCard = (props: Props): React.ReactElement => {
       <WithLoader loadingKey={LoadingStateEnum.CURRENT_WEATHER}>
         <Box className="weather-card-container">
           <Box className="weather-card-section1">
-            <img src={weather?.condition.icon} width="30%" />
+            <img alt="condition" src={weather?.condition.icon} width="30%" />
             <Typography variant="h3">{getTemperature()}</Typography>
           </Box>
           <Typography>{weather?.condition.text}</Typography>

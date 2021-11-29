@@ -42,7 +42,7 @@ const App = () => {
     dispatch({ type: Actions.SHOW_ERROR, data: undefined });
 
   return (
-    <Box className="app-container">
+    <Box className="app-container" data-testid="weather-container">
       <Header />
       <WeatherBody />
       <Alert msg={alert} onClose={onCloseAlert} />

@@ -44,4 +44,6 @@ const getCurrentWeather = (searchQuery: string): Promise<ForecastWeather> =>
       throw err;
     });
 
-export default { getLocationSuggestions, getCurrentWeather };
+const service = { getLocationSuggestions, getCurrentWeather };
+
+export default service;

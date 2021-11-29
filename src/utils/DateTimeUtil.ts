@@ -8,4 +8,5 @@ const getTimeAMPMFormat = (hour: number): string => {
 const getToday = (localtime?: string) =>
   localtime ? new Date(localtime).toDateString() : "";
 
-export default { getTimeAMPMFormat, getToday };
+const util = { getTimeAMPMFormat, getToday };
+export default util;

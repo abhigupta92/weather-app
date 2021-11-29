@@ -47,14 +47,17 @@ const WeatherBody = (): React.ReactElement => {
 
   useEffect(() => {
     getWeather();
+    // eslint-disable-next-line
   }, [location]);
 
   const onRefresh = () => getWeather();
 
   return (
-    <Box className="weather-container">
+    <Box className="weather-container" data-testid="weather-body">
       <Box className="header-container">
-        <Typography variant="h4">{location}</Typography>
+        <Typography variant="h4" data-testid="weather-current-location-label">
+          {location}
+        </Typography>
         <IconButton onClick={onRefresh}>
           <RefreshIcon className="icon-refresh" />
         </IconButton>

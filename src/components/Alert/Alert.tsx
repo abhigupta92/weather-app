@@ -36,6 +36,7 @@ const Alert = (props: Props): React.ReactElement => {
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      data-testid="weather-alert"
     >
       <DialogTitle id="alert-dialog-title">Error</DialogTitle>
       <DialogContent>
