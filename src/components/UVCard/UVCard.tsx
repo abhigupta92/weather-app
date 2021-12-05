@@ -37,11 +37,19 @@ const UVCard = (props: { uv?: number }): React.ReactElement => {
             className="uv-card-container-inner"
             style={{ border: `7px solid ${getUVColor(uv)}` }}
           >
-            <Typography variant="h3" style={{ color: getUVColor(uv) }}>
+            <Typography
+              variant="h3"
+              style={{ color: getUVColor(uv) }}
+              data-testid="uv-card-uv"
+            >
               {uv}
             </Typography>
           </Box>
-          <Typography variant="h3" style={{ color: getUVColor(uv) }}>
+          <Typography
+            variant="h3"
+            style={{ color: getUVColor(uv) }}
+            data-testid="uv-card-alert"
+          >
             {getUVAlert(uv)}
           </Typography>
         </Box>

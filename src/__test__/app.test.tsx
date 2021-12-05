@@ -6,38 +6,50 @@ import {
   act,
   within,
   fireEvent,
-  waitFor,
 } from "@testing-library/react";
+import restClient from "../service/restClient/index";
+import weatherService from "../service/weather";
+import locationService from "../service/location";
 
 import WeatherApp from "../WeatherApp";
-import { WeatherAppProvider } from "../context/WeatherAppContext";
+import { WeatherAppContext } from "../context/WeatherAppContext";
 
-import { currentLocation as mockCurrentLocation } from "./mockData/currentLocation.mock";
+import { mockCurrentLocation } from "./mockData/currentLocation.mock";
 import {
   mockLocationSuggestions,
   mockWeatherForecast,
 } from "./mockData/weather.mock";
 
-import { URL_GET_LOCATION as mock_URL_GET_LOCATION } from "../service/location";
-import {
-  URL_GET_LOCATION_SUGGESTIONS as mock_URL_GET_LOCATION_SUGGESTIONS,
-  URL_FORECAST_WEATHER as mock_URL_FORECAST_WEATHER,
-} from "../service/weather";
+import { state } from "./mockData/mockContextState";
+
+jest.mock("../service/restClient");
+jest.mock("../service/weather");
+jest.mock("../service/location");
+
+const customRender = (ui: any, { providerProps, ...renderOptions }: any) => {
+  return render(
+    <WeatherAppContext.Provider {...providerProps}>
+      {ui}
+    </WeatherAppContext.Provider>,
+    renderOptions
+  );
+};
 
 describe("Weather App", () => {
-  let wrapper;
+  let wrapper: any;
+  let providerProps: any;
   afterEach(cleanup);
-  beforeEach(() => {
+  beforeEach(async () => {
+    await mockRestClient();
     wrapper = undefined;
+    providerProps = {
+      value: { state, dispatch: () => {} },
+    };
   });
 
-  it("App loads correctly with all components", async () => {
-    await act(async () => {
-      wrapper = render(
-        <WeatherAppProvider>
-          <WeatherApp />
-        </WeatherAppProvider>
-      );
+  it("App loads correctly with all components", () => {
+    act(() => {
+      wrapper = customRender(<WeatherApp />, { providerProps });
     });
     expect(wrapper.getByTestId("weather-container")).toBeInTheDocument();
     expect(wrapper.getByTestId("weather-header")).toBeInTheDocument();
@@ -45,14 +57,11 @@ describe("Weather App", () => {
     expect(wrapper.getByTestId("location_search_input")).toBeInTheDocument();
   });
 
-  it("Search for Location", async () => {
-    await mockAxios();
+  it("Search for Location", () => {
     act(() => {
-      wrapper = render(
-        <WeatherAppProvider>
-          <WeatherApp />
-        </WeatherAppProvider>
-      );
+      wrapper = customRender(<WeatherApp />, { providerProps });
+    });
+    act(() => {
       const autocomplete = wrapper.getByTestId("location_search_input");
       const input = within(autocomplete).getByRole("textbox");
       autocomplete.focus();
@@ -60,24 +69,15 @@ describe("Weather App", () => {
       fireEvent.keyDown(autocomplete, { key: "ArrowDown" });
       fireEvent.keyDown(autocomplete, { key: "Enter" });
     });
-    await waitFor(() =>
-      expect(
-        wrapper.getByTestId("weather-current-location-label")
-      ).toBeInTheDocument()
-    );
-    await waitFor(() => {
-      expect(wrapper.queryByText("abcd")).not.toBeInTheDocument();
-    });
+    const label = wrapper.getByTestId("weather-current-location-label");
+    expect(label).toHaveTextContent("Singapore");
   });
 
-  it("Search for Location and get current weather", async () => {
-    await mockAxios();
-    await act(() => {
-      wrapper = render(
-        <WeatherAppProvider>
-          <WeatherApp />
-        </WeatherAppProvider>
-      );
+  it("Search for Location and get current weather", () => {
+    act(() => {
+      wrapper = customRender(<WeatherApp />, { providerProps });
+    });
+    act(() => {
       const autocomplete = wrapper.getByTestId("location_search_input");
       const input = within(autocomplete).getByRole("textbox");
       autocomplete.focus();
@@ -85,30 +85,31 @@ describe("Weather App", () => {
       fireEvent.keyDown(autocomplete, { key: "ArrowDown" });
       fireEvent.keyDown(autocomplete, { key: "Enter" });
     });
-    expect(
-      wrapper.getByTestId("weather-current-location-label")
-    ).toBeInTheDocument();
-    expect(
-      wrapper.getByTestId("weather-hour-list-container")
-    ).toBeInTheDocument();
+    expect(wrapper.getByTestId("current-card-temp")).toHaveTextContent("10");
+    expect(wrapper.getByTestId("current-card-weather")).toHaveTextContent(
+      "testText"
+    );
+    expect(wrapper.getByTestId("uv-card-uv")).toHaveTextContent("10");
+    expect(wrapper.getByTestId("uv-card-alert")).toHaveTextContent("Extreme");
   });
 });
 
-const mockAxios = () => {
+const mockRestClient = () => {
+  // restClient.get.mockResolvedValueOnce({});
+  // restClient.get.mockImplementationOnce(() => Promise.resolve({ data: {} }));
   jest.mock("axios", () => ({
-    get: jest.fn((url) => {
-      return new Promise((resolve) => {
-        switch (url) {
-          case mock_URL_GET_LOCATION:
-            return resolve({ data: mockCurrentLocation });
-          case mock_URL_GET_LOCATION_SUGGESTIONS:
-            return resolve({ data: mockLocationSuggestions });
-          case mock_URL_FORECAST_WEATHER:
-            return resolve({ data: mockWeatherForecast });
-          default:
-            return Promise.reject(new Error("not found"));
-        }
-      });
+    get: jest.fn(() => {
+      return Promise.resolve();
     }),
   }));
+  restClient.get.mockImplementationOnce(() => Promise.resolve({ data: {} }));
+  locationService.getCurrentLocation.mockImplementationOnce(() =>
+    Promise.resolve({ data: mockCurrentLocation })
+  );
+  weatherService.getCurrentWeather.mockImplementationOnce(() =>
+    Promise.resolve({ data: mockWeatherForecast })
+  );
+  weatherService.getLocationSuggestions.mockImplementationOnce(() =>
+    Promise.resolve({ data: mockLocationSuggestions })
+  );
 };

@@ -33,9 +33,13 @@ const CurrentWeatherCard = (props: Props): React.ReactElement => {
         <Box className="weather-card-container">
           <Box className="weather-card-section1">
             <img alt="condition" src={weather?.condition.icon} width="30%" />
-            <Typography variant="h3">{getTemperature()}</Typography>
+            <Typography variant="h3" data-testid="current-card-temp">
+              {getTemperature()}
+            </Typography>
           </Box>
-          <Typography>{weather?.condition.text}</Typography>
+          <Typography data-testid="current-card-weather">
+            {weather?.condition.text}
+          </Typography>
           <Divider />
           <Box className="weather-card-info-container">
             <InfoSection

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import isEmpty from "lodash/isEmpty";
+import get from "lodash/get";
 
 import weatherService from "../../service/weather";
 import DateTimeUtil from "../../utils/DateTimeUtil";
@@ -76,7 +77,7 @@ const WeatherBody = (): React.ReactElement => {
         </Typography>
         <HourlyWeather
           location={currentWeather?.location}
-          list={currentWeather?.forecast.forecastday[0].hour}
+          list={get(currentWeather, "forecast.forecastday[0].hour", [])}
           metric={metric}
         />
       </Box>

@@ -6,8 +6,8 @@ import { ForecastWeather } from "./types";
 
 const config = { key: "b5eee329235c4e16b01143510212611" };
 
-const URL_GET_LOCATION_SUGGESTIONS = "search.json";
-const URL_FORECAST_WEATHER = "forecast.json";
+export const URL_GET_LOCATION_SUGGESTIONS = "search.json";
+export const URL_FORECAST_WEATHER = "forecast.json";
 
 const createAPI = () => {
   const instance = axios.create({
