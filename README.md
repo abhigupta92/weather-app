@@ -31,6 +31,12 @@ All functioanlities and components are test covered
 Semantic Commits:
 https://nitayneeman.com/posts/understanding-semantic-commit-messages-using-git-and-angular/
 
+## Libraries
+
+1. HTTP Service: Axios
+2. Fetch Current Location: https://api.ipregistry.co
+3. Fetch Weather Statistics: http://api.weatherapi.com
+
 ## App ScreenShots
 
 PC:
